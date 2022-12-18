@@ -20,7 +20,7 @@ stripchart(rand4, pch=21, cex=0.25, main = "Random 4")
 set.seed(500)
 rand5 <- sample.int(N, size=n, replace=FALSE)
 stripchart(rand5, pch=21, cex=0.25, main = "Random 5")
-#Q2
+#Locations and spacing analysis
 get.pairs <- function(sample.m){
   pair <- c()
   for (i in seq(1,length(sample.m))){
@@ -32,7 +32,7 @@ get.pairs <- function(sample.m){
 get.tripl <- function(sample.m){
   trip <-c()
   for (i in seq(1,length(sample.m))){
-    x = sample.m[i] + sample.m[i+1] + sample.m[i+1]
+    x = sample.m[i] + sample.m[i+1] + sample.m[i+2]
     trip <- append(trip, x)
   }
   return (trip)
@@ -77,7 +77,7 @@ set.seed((100))
 theor <- rgamma(296, shape = 1, rate = 1/mean(y.trip, na.rm = TRUE))
 lines(ecdf(theor), lwd = 2,  col = rgb(0,0,1,0.5))
 legend(x = 0, y = 0.9, legend = c("hcmv triple", "Gamma"), lty = c(1,1), col = c(rgb(1,0,0,0.5), rgb(0,0,1,0.5)))
-### end of q2
+### interval counts analysis
 regionsplit <- function(n.region, gene, site){
   count.int <- table(cut(site, breaks = seq(1, length(gene), length.out=n.region+1), include.lowest=TRUE))
   count.vector <- as.vector(count.int)
@@ -125,10 +125,10 @@ plot((O3.trunc - E) / sqrt(E), type = 'h', ylab = "standardized residuals for Ra
 plot((O4.trunc - E) / sqrt(E), type = 'h', ylab = "standardized residuals for Rand4", xlab = "interval index")
 plot((O5.trunc - E) / sqrt(E), type = 'h', ylab = "standardized residuals for Rand5", xlab = "interval index")
 
-
+# simulate max counts
 nsim = 2000   # number of simulations
 
-# Simulate data
+
 max.count = rep(NULL, nsim)
 for(i in 1:nsim) {
   x = sample(1:N, size = n, replace = F)
